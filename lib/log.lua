@@ -80,9 +80,9 @@ function	log.printc(str, foreground, background, mode)
 end
 
 local	function	wrapper_header(header, foreground, str, mode)
-	log.print("[")
-	log.printc(computer.uptime(), log.c.yellow)
-	log.print("]")
+	-- log.print("[")
+	-- log.printc(computer.uptime(), log.c.yellow)
+	-- log.print("]")
 	log.print("[")
 	log.printc(header, foreground)
 	log.print("]")
