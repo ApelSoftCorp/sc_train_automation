@@ -17,7 +17,7 @@ local	DO_BIN = true
 local	DO_CONF = true
 local	DO_ETC = true
 local	DO_SERVICE = true
-local	DO_EXTRA = true
+local	DO_EXTRA = false
 
 local	DIR_BASE = "/usr"
 local	DIR_HOME ="/home"
@@ -119,18 +119,6 @@ function	update_bin()
 	wget_bin("lock.lua")
 
 	wget_bin("sc_train_station.lua")
-
-	wget_bin("test_print.lua")
-	wget_bin("test_rsa.lua")
-	wget_bin("test_rsa.priv")
-	wget_bin("test_rsa.pub")
-	wget_bin("test_server.lua")
-	wget_bin("test_chat.lua")
-	wget_bin("test_vgpu.lua")
-	wget_bin("test_bigint.lua")
-	wget_bin("test_tls.a.lua")
-	wget_bin("test_tls.b.lua")
-	wget_bin("test_zirnox.lua")
 end
 
 --- CONF
