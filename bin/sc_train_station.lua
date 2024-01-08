@@ -14,7 +14,6 @@ local	log = require("log")
 function	get_dot(i) return string.rep(".", i)..string.rep(" ", 3 - i) end
 
 --- STATION
-
 local	STATION_CONF_PATH = "/usr/etc/"
 
 station = {}
@@ -26,12 +25,12 @@ function	station.get_conf()
 		STATION_CONF_PATH = STATION_CONF_PATH..utils.hostname..".lua"
 		station.conf = loadfile(STATION_CONF_PATH)
 		if station.conf == nil then
-			log.fail(station.name..": config file, "..STATION_CONF_PATH..", not found")
+			log.fail("station: config file, "..STATION_CONF_PATH..", not found")
 		else
 			station.conf = station.conf()
 		end
 	else
-		log.fail(station.name..": hostname not found, aborting.")
+		log.fail("station: hostname not found, aborting.")
 	end
 	if station.conf == nil then os.exit(1) end
 end
