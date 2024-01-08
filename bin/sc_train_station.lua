@@ -66,13 +66,12 @@ function	get_dot(i)
 	return string.rep(".", i)..string.rep(" ", 3 - i)
 end
 
-function	train_arrival(info)
-	local	info
-	-- utils.enum_table(info)
+function	train_arrival(arrival, platform)
+	local	info = nil
 
-	conf.arrival["01"].AD.setTag("01-arrived")
-	conf.arrival["01"].AC.setThrottle(0)
-	conf.arrival["01"].AC.setBrake(0.95)
+	arrival.AD.setTag("01-arrived")
+	arrival.AC.setThrottle(0)
+	arrival.AC.setBrake(arrival.brake)
 
 	local	waiting_for_train = 1
 	local	term_x, term_y = term.getCursor()
@@ -80,7 +79,7 @@ function	train_arrival(info)
 	while true do
 		log.info("waiting for train"..get_dot(waiting_for_train))
 		term.setCursor(term_x, term_y - 1)
-		info = conf.platform["01"].AD["end"].getTag()
+		info = platform.AD["end"].getTag()
 
 		if info == "01-arrived" then
 			break
@@ -95,41 +94,41 @@ function	train_arrival(info)
 	end
 	term.setCursor(term_x, term_y)
 
-	conf.platform["01"].AD["end"].setTag("01-at-station")
-	conf.platform["01"].AC["end"].setBrake(1)
-	conf.platform["01"].AC["deadend"].setBrake(1)
-	conf.platform["01"].AC["end"].setThrottle(0)
-	conf.platform["01"].AC["deadend"].setThrottle(0)
+	platform.AD["end"].setTag("01-at-station")
+	platform.AC["end"].setBrake(1)
+	platform.AC["deadend"].setBrake(1)
+	platform.AC["end"].setThrottle(0)
+	platform.AC["deadend"].setThrottle(0)
 
 	log.pass("Train successfully arrived at platform 01")
 
-	conf.platform["01"].AC["end"].setBrake(1)
-	conf.platform["01"].AC["deadend"].setBrake(1)
+	platform.AC["end"].setBrake(1)
+	platform.AC["deadend"].setBrake(1)
 
-	local	waiting_for_departure = 10
+	local	waiting_for_departure = platform.depart_time
 	local	term_x, term_y = term.getCursor()
 
-	info = conf.platform["01"].AD["end"].info()
+	info = platform.AD["end"].info()
 
 	while waiting_for_departure > 0 do
-		info = conf.platform["01"].AD["end"].info()
+		info = platform.AD["end"].info()
 		log.info("Train departure in "..waiting_for_departure.." sec ("..info.passengers.."/60)"..get_dot((waiting_for_departure % 3) + 1))
 		term.setCursor(term_x, term_y - 1)
 		waiting_for_departure = waiting_for_departure - 1
 
-		conf.platform["01"].AC["end"].setBrake(1)
-		conf.platform["01"].AC["deadend"].setBrake(1)
-		conf.platform["01"].AC["end"].setThrottle(0)
-		conf.platform["01"].AC["deadend"].setThrottle(0)
+		platform.AC["end"].setBrake(1)
+		platform.AC["deadend"].setBrake(1)
+		platform.AC["end"].setThrottle(0)
+		platform.AC["deadend"].setThrottle(0)
 		os.sleep(1)
 	end
 	term.setCursor(term_x, term_y)
 
-	info = conf.platform["01"].AD["end"].info()
-	conf.platform["01"].AC["end"].setThrottle(0.75)
-	conf.platform["01"].AC["deadend"].setThrottle(0.75)
-	conf.platform["01"].AC["end"].setBrake(0)
-	conf.platform["01"].AC["deadend"].setBrake(0)
+	info = platform.AD["end"].info()
+	platform.AC["end"].setThrottle(platform.throttle)
+	platform.AC["deadend"].setThrottle(platform.throttle)
+	platform.AC["end"].setBrake(0)
+	platform.AC["deadend"].setBrake(0)
 	if info.passengers == 1 then
 		log.info("train go off with "..info.passengers.." passenger")
 	else
@@ -143,9 +142,10 @@ while running do
 	local	info = conf.arrival["01"].AD.info()
 
 	if info then
-		train_arrival(info)
+		-- utils.enum_table(info)
+		train_arrival(conf.arrival["01"], conf.platform["01"])
 	end
-	os.sleep(0.5)
+	os.sleep(utils.tick)
 end
 
 conf.arrival["01"].AD.setTag("01-arrived")
