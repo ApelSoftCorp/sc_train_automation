@@ -1,4 +1,5 @@
 local conf = {
+	["name"] = "Solas - Airport",
 	["arrival"] = {
 		["01"] = {
 			["AC"] = "76cb",
@@ -16,7 +17,7 @@ local conf = {
 				["end"] = "487e",
 			},
 			["available"] = true,
-			["depart_time"] = 60,
+			["depart_time"] = 360,
 			["throttle"] = 0.50,
 		},
 	},
