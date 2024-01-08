@@ -59,6 +59,27 @@ function	station.get_peripheral()
 		station.conf.arrival[a_k].AD = periph_im.get_ad("arrival_"..a_k, a_v.AD)
 		if not station.conf.arrival[a_k].AD then os.exit(1) end
 	end
+
+	for a_k, a_v in pairs(station.conf.highway) do
+		log.info("setup highway "..a_k)
+
+		station.conf.highway[a_k].AC = periph_im.get_ac("highway_"..a_k, a_v.AC)
+		if not station.conf.highway[a_k].AC then os.exit(1) end
+
+		station.conf.highway[a_k].AD = periph_im.get_ad("highway_"..a_k, a_v.AD)
+		if not station.conf.highway[a_k].AD then os.exit(1) end
+	end
+
+	for a_k, a_v in pairs(station.conf.switch) do
+		log.info("setup switch "..a_k)
+
+		station.conf.switch[a_k].periph = periph.redstone.get("switch_"..a_k, a_v.periph)
+		if not station.conf.switch[a_k].periph then os.exit(1) end
+		station.conf.switch[a_k].periph.setOutput(
+			station.conf.switch[a_k].side,
+			station.conf.switch[a_k].state
+		)
+	end
 end
 
 function	station.init()
@@ -77,10 +98,10 @@ end
 
 function	station.platform_wait_for_arrival(platform, platform_id)
 	local	i = 1
-	local	term_x, term_y = term.getCursor()
-	local	msg = station.name..": Waiting for arrival at "..platform_id
+	local	msg = station.conf.name..": Waiting for arrival at platform "..platform_id
 
 	log.info(msg)
+	local	term_x, term_y = term.getCursor()
 	while true do
 		print(msg..get_dot(i))
 		term.setCursor(term_x, term_y - 1)
@@ -96,7 +117,6 @@ function	station.platform_wait_for_arrival(platform, platform_id)
 		os.sleep(utils.tick)
 	end
 	term.setCursor(term_x, term_y)
-	platform_ad.setTag(platform_id.."-at-station")
 	platform.AD["end"].setTag(platform_id.."-at-station")
 	platform.AC["end"].setBrake(1)
 	platform.AC["deadend"].setBrake(1)
@@ -106,7 +126,7 @@ end
 
 function	station.platform_wait_for_departure(platform, platform_id)
 	local	term_x, term_y = term.getCursor()
-	local	fmt = station.name..": Train departure in %d sec (%d/60)"
+	local	fmt = station.conf.name..": Train departure in %d sec (%d/60)"
 	local	info = nil
 
 	for i = platform.depart_time, 1, -1 do
@@ -128,9 +148,9 @@ function	station.platform_wait_for_departure(platform, platform_id)
 	platform.AC["end"].setBrake(0)
 	platform.AC["deadend"].setBrake(0)
 	if info.passengers == 1 then
-		log.info(station.name..": Train go off with "..info.passengers.." passenger")
+		log.info(station.conf.name..": Train go off with "..info.passengers.." passenger")
 	else
-		log.info(station.name..": Train go off with "..info.passengers.." passengers")
+		log.info(station.conf.name..": Train go off with "..info.passengers.." passengers")
 	end
 end
 
@@ -139,8 +159,8 @@ function	station.train_arrival(arrival, platform_id)
 	local	info = nil
 
 	station.arrival_brake(arrival, platform_id)
-	station.platform_wait_for_arrival(platform.AD["end"], platform_id)
-	log.pass(station.name..": Train successfully arrived at platform "..platform_id)
+	station.platform_wait_for_arrival(platform, platform_id)
+	log.pass(station.conf.name..": Train successfully arrived at platform "..platform_id)
 	station.platform_wait_for_departure(platform, platform_id)
 end
 

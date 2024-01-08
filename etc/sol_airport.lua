@@ -21,5 +21,19 @@ local conf = {
 			["throttle"] = 0.50,
 		},
 	},
+	["highway"] = {
+		["02"] = {
+			["AC"] = "ebb1",
+			["AD"] = "36c6",
+			["available"] = true,
+		},
+	},
+	["switch"] = {
+		["01-02"] = {
+			["periph"] = "69b6",
+			["side"] = 1,
+			["state"] = 0,
+		},
+	},
 }
 return conf
