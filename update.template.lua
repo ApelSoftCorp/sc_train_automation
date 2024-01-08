@@ -150,7 +150,11 @@ function	update_etc()
 
 	print("Downloading etc")
 
+	--- test
 	wget_etc("T01.lua")
+
+	--- SC SOLAS TRAIN STATION
+	wget_etc("sol_airport.lua")
 end
 
 --- SERVICE
