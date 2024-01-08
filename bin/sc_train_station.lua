@@ -40,12 +40,12 @@ function	station.get_peripheral()
 		log.info("setup platform "..p_k)
 
 		for ad_k, ad_v in pairs(p_v.AD) do
-			station.conf.platform[p_k].AD[ad_k] = periph.get(ad_k, ad_v)
+			station.conf.platform[p_k].AD[ad_k] = periph_im.get_ad(ad_k, ad_v)
 			if not station.conf.platform[p_k].AD[ad_k] then os.exit(1) end
 		end
 
 		for ac_k, ac_v in pairs(p_v.AC) do
-			station.conf.platform[p_k].AC[ac_k] = periph.get(ac_k, ac_v)
+			station.conf.platform[p_k].AC[ac_k] = periph_im.get_ac(ac_k, ac_v)
 			if not station.conf.platform[p_k].AC[ac_k] then os.exit(1) end
 		end
 	end
@@ -53,10 +53,10 @@ function	station.get_peripheral()
 	for a_k, a_v in pairs(station.conf.arrival) do
 		log.info("setup arrival "..a_k)
 
-		station.conf.arrival[a_k].AC = periph.get("arrival_"..a_k, a_v.AC)
+		station.conf.arrival[a_k].AC = periph_im.get_ac("arrival_"..a_k, a_v.AC)
 		if not station.conf.arrival[a_k].AC then os.exit(1) end
 
-		station.conf.arrival[a_k].AD = periph.get("arrival_"..a_k, a_v.AD)
+		station.conf.arrival[a_k].AD = periph_im.get_ad("arrival_"..a_k, a_v.AD)
 		if not station.conf.arrival[a_k].AD then os.exit(1) end
 	end
 end
@@ -138,8 +138,8 @@ function	station.train_arrival(arrival, platform_id)
 	local	platform = station.conf.platform[platform_id]
 	local	info = nil
 
-	station.arrival_train_brake(arrival, platform_id)
-	station.platform_wait_for_train(platform.AD["end"], platform_id)
+	station.arrival_brake(arrival, platform_id)
+	station.platform_wait_for_arrival(platform.AD["end"], platform_id)
 	log.pass(station.name..": Train successfully arrived at platform "..platform_id)
 	station.platform_wait_for_departure(platform, platform_id)
 end
