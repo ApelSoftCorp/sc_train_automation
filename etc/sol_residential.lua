@@ -1,9 +1,9 @@
 local conf = {
-	["name"] = "Solas - Airport",
+	["name"] = "Solas - Residential",
 	["arrival"] = {
 		["arrival_01"] = {
-			["AC"] = "76cb",
-			["AD"] = "56ff",
+			["AC"] = "f8d4",
+			["AD"] = "9436",
 			["brake"] = 0.10,
 			["switch"] = "switch_A",
 			["railway"] = {
@@ -15,11 +15,11 @@ local conf = {
 	["platform"] = {
 		["platform_01"] = {
 			["AC"] = {
-				["end"] = "3245",
-				["deadend"] = "61be",
+				["end"] = "d6af",
+				["deadend"] = "6dfe",
 			},
 			["AD"] = {
-				["end"] = "487e",
+				["end"] = "df0c",
 			},
 			["available"] = true,
 			-- ["depart_time"] = 360,
@@ -29,8 +29,8 @@ local conf = {
 	},
 	["highway"] = {
 		["highway_02"] = {
-			["AC"] = "ebb1",
-			["AD"] = "36c6",
+			["AC"] = "a5d0",
+			["AD"] = "6a5d",
 			["available"] = true,
 		},
 	},
@@ -40,7 +40,7 @@ local conf = {
 				["platform_01"] = 1,
 				["highway_02"] = 0,
 			},
-			["periph"] = "6b0f",
+			["periph"] = "6624",
 			["side"] = 1,
 			["state"] = "platform_01",
 		},

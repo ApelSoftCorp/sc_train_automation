@@ -12,7 +12,7 @@ function log.periph_pass(periph_type, periph_subtype, name, addr, str)
 	log.printc(computer.uptime(), log.c.yellow)
 	log.print("]")
 	log.print("[")
-	log.printc("⌨", log.c.cyan)
+	log.printc("🛠", log.c.cyan)
 	log.print("]")
 	log.print("[")
 	log.printc("OK", log.c.green)
@@ -60,6 +60,8 @@ redstone = {}
 
 function redstone.get(name, addr)
 	local	c = periph.wrapper("periph", "redstone", name, addr)
+
+	if c == nil then return c end
 
 	c.setOutput(0, 0)
 	c.setOutput(1, 0)
