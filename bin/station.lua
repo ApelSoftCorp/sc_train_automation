@@ -240,7 +240,6 @@ end
 
 function	station.train_skip(arrival, highway_id)
 	local	highway = station.conf.highway[highway_id]
-	local	info = nil
 
 	arrival.AD.setTag(highway_id.."-passing")
 	log.info(station.conf.name..": Station full, redirect train to highway "..highway_id)
@@ -262,6 +261,7 @@ function	station.run()
 			elseif retv == 2 then
 				station.train_skip(station.conf.arrival["arrival_01"], railway_id)
 			elseif retv == 0 then
+				log.fail("PANIC ERROR")
 			end
 		end
 		os.sleep(utils.tick)
