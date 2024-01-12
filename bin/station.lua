@@ -19,22 +19,18 @@ local	STATION_CONF_PATH = "/usr/etc/"
 station = {}
 
 	--- UTILS
-function station.set_switch(switch_id, railway)
-	local	switch = station.conf.switch[switch_id]
-	local	rw = switch.railway[railway]
+function station.set_switch(switch, railway)
+	for _, id in ipairs(switch) do
+		local	s = station.conf.switch[id]
+		local	rw = s.railway[railway]
 
-	if rw == nil then
-		log.fail(
-			station.conf.name..": Set "..switch_id..", to "
-			..railway.." failed."
+		if rw == nil then return end
+		s.periph.setOutput(s.side, rw)
+		log.pass(
+			station.conf.name..": Set "..id..", to "
+			..railway.." succeed."
 		)
-		return
 	end
-	switch.periph.setOutput(switch.side, rw)
-	log.pass(
-		station.conf.name..": Set "..switch_id..", to "
-		..railway.." succeed."
-	)
 end
 
 	--- INIT
@@ -69,16 +65,6 @@ function	station.get_peripheral()
 		end
 	end
 
-	for a_k, a_v in pairs(station.conf.arrival) do
-		log.info(station.conf.name..": Setup arrival "..a_k..".")
-
-		station.conf.arrival[a_k].AC = periph_im.get_ac("arrival_"..a_k, a_v.AC)
-		if not station.conf.arrival[a_k].AC then os.exit(1) end
-
-		station.conf.arrival[a_k].AD = periph_im.get_ad("arrival_"..a_k, a_v.AD)
-		if not station.conf.arrival[a_k].AD then os.exit(1) end
-	end
-
 	for a_k, a_v in pairs(station.conf.highway) do
 		log.info(station.conf.name..": Setup highway "..a_k..".")
 
@@ -94,7 +80,21 @@ function	station.get_peripheral()
 
 		station.conf.switch[a_k].periph = periph.redstone.get("switch_"..a_k, a_v.periph)
 		if not station.conf.switch[a_k].periph then os.exit(1) end
-		station.set_switch(a_k, station.conf.switch[a_k].state)
+	end
+
+	for a_k, a_v in pairs(station.conf.arrival) do
+		log.info(station.conf.name..": Setup arrival "..a_k..".")
+
+		station.conf.arrival[a_k].AC = periph_im.get_ac("arrival_"..a_k, a_v.AC)
+		if not station.conf.arrival[a_k].AC then os.exit(1) end
+
+		station.conf.arrival[a_k].AD = periph_im.get_ad("arrival_"..a_k, a_v.AD)
+		if not station.conf.arrival[a_k].AD then os.exit(1) end
+
+		station.set_switch(
+			station.conf.arrival[a_k].switch,
+			station.conf.arrival[a_k].default_railway
+		)
 	end
 end
 

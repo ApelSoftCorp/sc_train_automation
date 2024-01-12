@@ -1,10 +1,10 @@
 local conf = {
-	["name"] = "Solas - Residential",
+	["name"] = "Solas - Main Station",
 	["arrival"] = {
 		["arrival_01"] = {
-			["AC"] = "f8d4",
-			["AD"] = "9436",
-			["brake"] = 0.16,
+			["AC"] = "2a7f",
+			["AD"] = "d795",
+			["brake"] = 0.30,
 			["switch"] = {
 				"switch_A",
 			},
@@ -18,11 +18,11 @@ local conf = {
 	["platform"] = {
 		["platform_01"] = {
 			["AC"] = {
-				["end"] = "d6af",
-				["deadend"] = "6dfe",
+				["end"] = "1c4e",
+				["deadend"] = "c2fd",
 			},
 			["AD"] = {
-				["end"] = "df0c",
+				["end"] = "a19c",
 			},
 			["available"] = true,
 			-- ["depart_time"] = 360,
@@ -32,18 +32,18 @@ local conf = {
 	},
 	["highway"] = {
 		["highway_02"] = {
-			["AC"] = "a5d0",
-			["AD"] = "6a5d",
+			["AC"] = "4cf6",
+			["AD"] = "8c3a",
 			["available"] = true,
 		},
 	},
 	["switch"] = {
 		["switch_A"] = {
 			["railway"] = {
-				["platform_01"] = 1,
-				["highway_02"] = 0,
+				["platform_01"] = 0,
+				["highway_02"] = 1,
 			},
-			["periph"] = "6624",
+			["periph"] = "9451",
 			["side"] = 1,
 			["state"] = "platform_01",
 		},

@@ -4,8 +4,11 @@ local conf = {
 		["arrival_01"] = {
 			["AC"] = "76cb",
 			["AD"] = "56ff",
-			["brake"] = 0.10,
-			["switch"] = "switch_A",
+			["brake"] = 0.14,
+			["switch"] = {
+				"switch_A",
+			},
+			["default_railway"] = "platform_01",
 			["railway"] = {
 				"platform_01",
 				"highway_02",

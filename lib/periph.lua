@@ -58,19 +58,23 @@ end
 
 redstone = {}
 
-function redstone.get(name, addr)
-	local	c = periph.wrapper("periph", "redstone", name, addr)
-
-	if c == nil then return c end
-
+function	redstone.reset(c)
 	c.setOutput(0, 0)
 	c.setOutput(1, 0)
 	c.setOutput(2, 0)
 	c.setOutput(3, 0)
 	c.setOutput(4, 0)
 	c.setOutput(5, 0)
+end
+
+function redstone.get(name, addr)
+	local	c = periph.wrapper("periph", "redstone", name, addr)
+
+	if c == nil then return c end
+	redstone.reset(c)
 	return c
 end
 
 periph.redstone = redstone
+
 return periph
