@@ -26,7 +26,7 @@ local conf = {
 			},
 			["available"] = true,
 			-- ["depart_time"] = 360,
-			["depart_time"] = 10,
+			["depart_time"] = 60,
 			["throttle"] = 0.50,
 		},
 	},

@@ -109,6 +109,7 @@ end
 function	station.arrival_brake(arrival, platform_id)
 	arrival.AD.setTag(platform_id.."-arrived")
 	arrival.AC.setThrottle(0)
+	log.info(station.conf.name..": Setup brake to "..arrival.brake)
 	arrival.AC.setBrake(arrival.brake)
 end
 

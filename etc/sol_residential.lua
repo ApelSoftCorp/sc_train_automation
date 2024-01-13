@@ -4,7 +4,7 @@ local conf = {
 		["arrival_01"] = {
 			["AC"] = "f8d4",
 			["AD"] = "9436",
-			["brake"] = 0.16,
+			["brake"] = 0.17,
 			["switch"] = {
 				"switch_A",
 			},
@@ -26,7 +26,7 @@ local conf = {
 			},
 			["available"] = true,
 			-- ["depart_time"] = 360,
-			["depart_time"] = 10,
+			["depart_time"] = 60,
 			["throttle"] = 0.50,
 		},
 	},
