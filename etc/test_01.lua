@@ -1,5 +1,5 @@
 local conf = {
-	["name"] = "TEST - Main Station",
+	["name"] = "TEST - 01",
 	["arrival"] = {
 		["arrival_01"] = {
 			["AC"] = "4898",

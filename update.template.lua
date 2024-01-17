@@ -118,7 +118,14 @@ function	update_bin()
 	print("Downloading bin")
 	wget_bin("lock.lua")
 
-	wget_bin("sc_train_station.lua")
+	wget_bin("station.lua")
+	wget_bin("station_display.lua")
+	wget_bin("pong.lua")
+
+	wget_bin("test_client.lua")
+	wget_bin("test_node.lua")
+	wget_bin("test_server.lua")
+	wget_bin("test_pong.lua")
 end
 
 --- CONF
@@ -151,10 +158,13 @@ function	update_etc()
 	print("Downloading etc")
 
 	--- test
-	wget_etc("T01.lua")
+	wget_etc("test_01.lua")
+	wget_etc("test_02.lua")
 
 	--- SC SOLAS TRAIN STATION
 	wget_etc("sol_airport.lua")
+	wget_etc("sol_residential.lua")
+	wget_etc("sol_main_station.lua")
 end
 
 --- SERVICE
