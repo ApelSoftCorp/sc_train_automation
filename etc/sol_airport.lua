@@ -4,7 +4,7 @@ local conf = {
 		["arrival_01"] = {
 			["AC"] = "76cb",
 			["AD"] = "56ff",
-			["brake"] = 0.14,
+			["brake"] = 0.18,
 			["switch"] = {
 				"switch_A",
 			},
