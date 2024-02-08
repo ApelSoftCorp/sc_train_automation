@@ -4,12 +4,12 @@
 
 ### Setup update.template.lua
 
-This repo is a template from this [repo](https://github.com/Pixailz/OpenComputer),
-and it's include an update.template.lua that need to be configured to easily
-transfert file beetween host PC and OC PC
+This repository is a template from this
+[repository](https://github.com/Pixailz/OpenComputer), and it includes an
+`update.template.lua` that needs to be configured to easily transfer files
+between the host PC and the OC PC.
 
-Please refer to it for more informations
-
+Please refer to it for more information.
 ## LINKS
 
 1. [ImmersiveRailroading](https://github.com/TeamOpenIndustry/ImmersiveRailroading/wiki/Augment-Detector)
